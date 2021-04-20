@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template.html}">
+<head>
+<meta charset="utf-8">
+<title>Evenement</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<h2>EVENEMENT</h2>
+
+		<div class="col-md-6">
+			<div class="card ">
+				<div class="card-header bg-primary text-white">Rechercher un
+					événement</div>
+				<div class="card-body">
+					<form th:action="@{/rechercherEvent}" method="get">
+						<div>
+							<label>Type d'événement : </label> <input type="text"
+								name="id_event">
+							<button type="submit" class="btn btn-success">Rechercher</button>
+						</div>
+					</form>
+					<div class="text-danger" th:if="${execption}"
+						th:text="${execption.message}"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="card " th:if="${event}">
+				<div class="card-header bg-primary text-white">Info Event</div>
+				<div class="card-body">
+
+					<div>
+						<label>Titre : </label><label th:text="${evenement.nom_event}"></label>
+					</div>
+
+					<div>
+						<label>Date : </label><label th:text="${evenement.date_event}"></label>
+						<label>Lieu : </label><label th:text="${evenement.localisation}"></label>
+					</div>
+
+					<div>
+						<label>Description : </label><label
+							th:text="${evenement.description}"></label>
+					</div>
+
+					<div>
+						<label>Prix : </label><label th:text="${evenement.prix}"></label>
+					</div>
+
+					<button class="btn btn-success">Reserver</button>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.univ.tours.app.GestionEvent.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,9 +32,9 @@ public interface EvenementRepository extends JpaRepository<Evenement, Long> {
 	@Query("delete from Evenement e where e.id_event=:x")
 	public void deleteEvent(@Param("x") Long id_event);
 	
-	/*@Query("select * from Evenement")
-	public void listerEvent();
-	*/
+	@Query("select e from Evenement e")
+	public List<Evenement> listeEvent();
+	
 	
 	@Query("select e from Evenement e where e.nom_event=:x")
 	public Evenement searchEvent(@Param("x") String nom_event);

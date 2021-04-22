@@ -1,6 +1,8 @@
 package com.univ.tours.app.GestionEvent.metier;
 
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 
@@ -14,7 +16,7 @@ public interface GestionEventMetier {
 	public Personne consulterPersonne(Long id_perso);
 	public Reservation consulterReservation(Long id_res);
 	
-	public void listeEvent();
+	public List<Evenement> listeEvent();
 	
 	public void reserverEvent(String type_event ,Long id_perso, Long id_event);
 	public void annulerRes(Long id_res,Long id_perso, Long id_event);

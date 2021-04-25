@@ -20,6 +20,9 @@ public interface EvenementRepository extends JpaRepository<Evenement, Long> {
 	@Query("select e from Evenement e where e.id_event=:x")
 	public Page<Evenement> listEvenPage(@Param("x") Long id_event, Pageable pageable);
 	
+	@Query("select e from Evenement e where e.id_event=:x")
+    public Evenement searchEventId(@Param("x") Long id_event);
+	
 	@Query("select e from Evenement e where e.type_event=:x")
 	public Page<Evenement> rechercheType(@Param("x") String type, Pageable pageable);
 	

@@ -43,6 +43,8 @@ public class GestionEventApplication implements CommandLineRunner {
 		
 		Evenement e1 = evenementRepository.save(new Evenement("Party in Peace", "Festival","Fête démentielle de 3 jours.", "Miami",new Date(), 300, 700));
 		Evenement e2 = evenementRepository.save(new Evenement("Astroworld", "Festival","Travis Scott x Sheck Wes - JackBoys Tour" ,"Houston",new Date(), 175, 3000));
+		Evenement e3 = evenementRepository.save(new Evenement("Barcelona FC - Real Madrid CF", "Match","Finale de la Supercopa organisée par les Émirats arabes unis", "Dubai",new Date(), 340, 60000));
+
 		
 		Reservation res = reservationRepository.save(new Reservation("STANDARD",new Date(),p1,e1));
 		Reservation res2 = reservationRepository.save(new Reservation("VIP",new Date(),p3,e1));

@@ -36,7 +36,7 @@ public interface EvenementRepository extends JpaRepository<Evenement, Long> {
 	public List<Evenement> listeEvent();
 	
 	
-	@Query("select e from Evenement e where e.nom_event=:x")
+	@Query("select e from Evenement e where e.nom_event like %:x%")
 	public Evenement searchEvent(@Param("x") String nom_event);
 	
 	

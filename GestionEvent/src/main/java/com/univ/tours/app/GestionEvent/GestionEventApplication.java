@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.univ.tours.app.GestionEvent.dao.EvenementRepository;
 import com.univ.tours.app.GestionEvent.dao.PersonneRepository;
@@ -16,6 +17,7 @@ import com.univ.tours.app.GestionEvent.entities.Reservation;
 import com.univ.tours.app.GestionEvent.metier.GestionEventMetier;
 
 @SpringBootApplication
+@ComponentScan({"com.univ.tours.app.GestionEvent"})
 public class GestionEventApplication implements CommandLineRunner {
 
 	@Autowired

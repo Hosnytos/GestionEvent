@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template.html}">
+<head>
+<meta charset="utf-8">
+<title>Page d'accueil</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<h2>EVENEMENT</h2>
+
+		<div align="center" class="container my-1">
+			<h1>Liste des événements</h1>
+			<table border="1" class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th>Nom de l'event</th>
+						<th>Type de l'event</th>
+						<th>Description de l'event</th>
+						<th>Date de l'event</th>
+						<th>Prix de l'event</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="evenement:${listeEvent}">
+						<td th:text="${evenement.nom_event}"></td>
+						<td th:text="${evenement.type_event}"></td>
+						<td th:text="${evenement.description}"></td>
+						<td th:text="${evenement.date_event}"></td>
+						<td th:text="${evenement.prix}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+</body>
+</html>

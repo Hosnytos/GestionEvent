@@ -27,7 +27,7 @@ public class GestionEventController {
 	private EvenementRepository evenementRepo;
 
 	@RequestMapping("/index")
-	public String listeEvent(Model model, @RequestParam(name="page", defaultValue = "0") int p, @RequestParam(name="size", defaultValue = "10") int s){
+	public String listeEvent(Model model, @RequestParam(name="page", defaultValue = "0") int p, @RequestParam(name="size", defaultValue = "4") int s){
 		//List<Evenement> evenement = gestionEventMetier.listeEvent();
 		//model.addAttribute("evenement", evenement);
 		//model.addAttribute("listeEvent", gestionEventMetier.listeEvent());

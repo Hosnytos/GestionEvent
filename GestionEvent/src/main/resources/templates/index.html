@@ -41,13 +41,18 @@
 					</tr>
 				</tbody>
 			</table>
+			
+			<!--  <input type="button" th:href="@{addEvent}" value="Ajouter" />  -->
+
+			<button class="btn btn-light">
+				<a th:href="@{addEvent}" value="">Ajouter</a>
+			</button>
 
 			<div>
 				<ul class="nav nav-pills">
 					<li th:class="${pageCourante}==${status.index}? 'active':''"
 						th:each="pa,status:${pages}"><a
-						th:href="@{index(page=${status.index})}"
-						th:text="${status.index}"></a></li>
+						th:href="@{index(page=${status.index})}" th:text="${status.index}"></a></li>
 				</ul>
 			</div>
 

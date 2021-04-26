@@ -1,6 +1,7 @@
 package com.univ.tours.app.GestionEvent.controllers;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.univ.tours.app.GestionEvent.dao.EvenementRepository;
@@ -37,7 +39,7 @@ public class GestionEventController {
 		model.addAttribute("pages", pages);
 		model.addAttribute("size", s);
 		model.addAttribute("pageCourante", p);
-		
+
 		return "index";
 
 	}
@@ -76,4 +78,38 @@ public class GestionEventController {
 		return "evenement_show";
 
 	}
+
+	/*
+	@RequestMapping("/addEvent")
+	public void addEvent(Model model, String nom_event, String type_event, String description,String localisation, Date date_event, 
+			double prix, int quantite){
+
+		try {
+			Evenement e = evenementRepo.save(new Evenement(nom_event, type_event, description, localisation, date_event, prix, quantite));
+			model.addAttribute("evenement", e);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		//return "evenement_add";
+
+	}
+	 */
+
+	@RequestMapping(value = "/addEvent", method = RequestMethod.GET)
+	public String addEvent(Model model){
+		model.addAttribute("evenement", new Evenement());
+		return "evenement_add";
+
+	}
+	
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String save(Model model, Evenement evenement){
+		
+		evenementRepo.save(evenement);
+		return "confirmation";
+
+	}
+
+
 }

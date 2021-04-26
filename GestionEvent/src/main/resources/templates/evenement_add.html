@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template.html}">
+<head>
+<meta charset="utf-8">
+<title>Ajouter un événement</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+</head>
+
+<body>
+
+
+	<form th:action="@{/save}" method="post">
+		<div align="center" layout:fragment="content">
+			<div class="col-md-12">
+				<!-- Nom de l'événement -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="nom_event">Nom</label>
+					<div class="col-md-3">
+						<input id="nom_event" name="nom_event"
+							placeholder="Nom de l'événement" class="form-control input-md"
+							required="required" type="text" th:value="${evenement.nom_event}" />
+					</div>
+				</div>
+
+				<!-- Type de l'événement -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="type_event">Type</label>
+					<div class="col-md-3">
+						<input id="type_event" name="type_event"
+							placeholder="Type d'événement" class="form-control input-md"
+							required="required" type="text"
+							th:value="${evenement.type_event}" />
+					</div>
+				</div>
+				
+				<!-- Date de l'événement -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="date_event">Date</label>
+					<div class="col-md-3">
+						<input id="date_event" name="date_event"
+							placeholder="Type d'événement" class="form-control input-md"
+							required="required" type="date"
+							th:value="${evenement.date_event}" />
+					</div>
+				</div>
+
+				<!-- Lieu de l'événement -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="localisation">Lieu</label>
+					<div class="col-md-3">
+						<input id="localisation" name="localisation"
+							placeholder="Lieu de l'événement" class="form-control input-md"
+							required="required" type="text"
+							th:value="${evenement.localisation}" />
+					</div>
+				</div>
+
+				<!-- Prix de l'événement -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="prix">Prix</label>
+					<div class="col-md-3">
+						<input id="prix" name="prix" placeholder="Prix de l'événement"
+							class="form-control input-md" required="required" type="text"
+							th:value="${evenement.prix}" />
+					</div>
+				</div>
+
+				<!-- Quantité de l'événement -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="quantite">Nombre
+						de places</label>
+					<div class="col-md-3">
+						<input id="quantite" name="quantite"
+							placeholder="Nombre de places de l'événement"
+							class="form-control input-md" required="required" type="text"
+							th:value="${evenement.quantite}" />
+					</div>
+				</div>
+
+
+				<!-- Description -->
+				<div class="form-group">
+					<label class="col-md-6 control-label" for="description">Description</label>
+					<div class="col-md-6">
+						<textarea class="form-control" id="description" name="description"
+							required="required" placeholder="Description de l'événement"
+							th:value="${evenement.description}"></textarea>
+					</div>
+				</div>
+
+				<!-- Button -->
+				<div class="form-group">
+					<button type="submit" class="btn btn-success" >Confirmer</button>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template.html}">
+<head>
+<meta charset="utf-8">
+<title>Evénement créé</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+</head>
+
+<body>
+
+	<div align="center" layout:fragment="content">
+		<div class="col-md-6">
+			<div class="card-header bg-primary text-white">
+				Info sur : <label th:text="${evenement.nom_event}"></label>
+			</div>
+			<div class="card-body">
+
+				<div>
+					<label>Titre : </label> <label th:text="${evenement.nom_event}"></label>
+				</div>
+
+				<div>
+					<label>Type : </label> <label th:text="${evenement.type_event}"></label>
+				</div>
+
+				<div>
+					<label>Date : </label> <label th:text="${evenement.date_event}"></label>
+				</div>
+				<div>
+					<label>Lieu : </label> <label th:text="${evenement.localisation}"></label>
+				</div>
+
+				<div>
+					<label>Prix : </label> <label th:text="${evenement.prix}"></label>
+				</div>
+
+				<div>
+					<label>Nombre de places : </label> <label
+						th:text="${evenement.quantite}"></label>
+				</div>
+
+				<div>
+					<label>Description : </label> <label
+						th:text="${evenement.description}"></label>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

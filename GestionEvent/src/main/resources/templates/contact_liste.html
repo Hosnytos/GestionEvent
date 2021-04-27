@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template.html}">
+<head>
+<meta charset="UTF-8">
+<title>Contact</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+	integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div layout:fragment="content">
+		
+		<div align="center" class="container my-1">
+			<h1>Liste des messages</h1>
+			<br>
+			<table border="1" class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Email</th>
+						<th>Sujet</th>
+						<th>Date</th>
+						<th>Message</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="contact:${listContact}">
+						<td th:text="${contact.nom}"></td>
+						<td th:text="${contact.email}"></td>
+						<td th:text="${contact.sujet}"></td>
+						<td th:text="${contact.date_msg}"></td>
+						<td th:text="${contact.message}"></td>
+						<td><a th:href="@{suppContact(id_contact =${contact.id_contact})}">Supprimer</a></td>
+						
+					</tr>
+				</tbody>
+			</table>
+
+			<br>
+			<hr>
+			<nav aria-label="..." >
+			  <ul class="pagination justify-content-center">
+			  	<li th:class="${pageCourante}==${status.index}?'page-item active':''" th:each="pa,status:${pages}">
+			  		<a class="page-link"  th:href="@{afficherContact(page=${status.index})}" th:text="${status.index}"></a>
+			  	</li>
+			  
+			  </ul>
+			</nav>
+
+		</div>
+	</div>
+
+</body>
+</html>

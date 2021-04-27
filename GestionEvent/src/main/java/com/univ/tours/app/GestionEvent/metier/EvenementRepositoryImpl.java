@@ -5,8 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +66,7 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 		Personne p = consulterPersonne(id_perso);
 		Evenement e = consulterEvent(id_event);
 		
-		int verifQant = 0;
+		double verifQant = 0;
 		verifQant = e.getQuantite();
 		
 		if(verifQant <= 0) throw new RuntimeException("Il n'y a plus de place pour cet événement");
@@ -88,11 +90,11 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 	
 	//GESTION EVENEMENT
 	@Override
-	public void addEvent(String nom_event, String type_event, String description,String localisation, Date date_event, 
-			double prix, int quantite) {
+	public void addEvent(String nom_event, String type_event, String description,String localisation, LocalDate date_event, 
+			double prix, double quantite) {
 		
-		Evenement e = evenementRepository.save(new Evenement(nom_event,type_event,description,localisation,new Date(),prix,quantite));
-		
+		Evenement e = evenementRepository.save(new Evenement(nom_event,type_event,description,localisation,date_event,prix,quantite));
+		//this.evenementRepository.save(evenement);
 		
 	}
 
@@ -106,7 +108,7 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 	@Override
 	public void deleteEvent(Long id_event) {
 		
-		evenementRepository.deleteEvent(id_event);
+		this.evenementRepository.deleteEvent(id_event);
 		
 		
 	}

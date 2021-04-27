@@ -1,31 +1,37 @@
 package com.univ.tours.app.GestionEvent.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+
 
 @Entity
 public class Evenement implements Serializable {
 
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_event;
 
 	private String nom_event;
 	private String type_event;
 	private String description;
-	private Date date_event;
+	private LocalDate date_event;
 	private String localisation;
 	private double prix;
-	private int quantite;
+	private double quantite;
 
 
 
-	@OneToMany(mappedBy = "evenement")
+	@OneToMany(cascade = CascadeType.ALL , mappedBy = "evenement")
 	Collection<Reservation> reservations;
 
 
@@ -36,8 +42,8 @@ public class Evenement implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Evenement(String nom_event, String type_event, String description,String localisation, Date date_event, 
-			double prix, int quantite) {
+	public Evenement(String nom_event, String type_event, String description,String localisation, LocalDate date_event, 
+			double prix, double quantite) {
 		super();
 		this.nom_event = nom_event;
 		this.type_event = type_event;
@@ -82,11 +88,11 @@ public class Evenement implements Serializable {
 		this.description = description;
 	}
 
-	public Date getDate_event() {
+	public LocalDate getDate_event() {
 		return date_event;
 	}
 
-	public void setDate_event(Date date_event) {
+	public void setDate_event(LocalDate date_event) {
 		this.date_event = date_event;
 	}
 
@@ -106,11 +112,11 @@ public class Evenement implements Serializable {
 		this.prix = prix;
 	}
 
-	public int getQuantite() {
+	public double getQuantite() {
 		return quantite;
 	}
 
-	public void setQuantite(int quantite) {
+	public void setQuantite(double quantite) {
 		this.quantite = quantite;
 	}
 

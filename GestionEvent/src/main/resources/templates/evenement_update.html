@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{template.html}">
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{template.html}">
 <head>
 <meta charset="UTF-8">
-<title>Ajouter un événement</title>
+<title>Modifier un événement</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -21,8 +21,8 @@
 			<section class="mb-4 ">
 
 				<!--Section heading-->
-				<h2 class="h1-responsive font-weight-bold text-center my-4">Nouvel
-					événement</h2>
+				<h2 class="h1-responsive font-weight-bold text-center my-4">Modifier
+					un événement</h2>
 				<!--Section description-->
 
 				<div class="row">
@@ -31,6 +31,9 @@
 					<div class="col-md-12 mb-md-0 mb-5">
 						<form th:action="@{/saveEvent}" th:object="${evenement}"
 							method="POST">
+
+							<!-- Add hidden form field to handle update -->
+							<input type="hidden" th:value="*{id_event}" />
 
 							<!--Grid row-->
 							<div class="row">
@@ -117,7 +120,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="md-form mb-0">
-										<label for="date" class="">Date</label> <input type="date"
+										<label for="subject" class="">Date</label> <input type="date"
 											id="date_event" name="date_event" class="form-control"
 											th:value="*{date_event}">
 									</div>
@@ -128,15 +131,13 @@
 
 							<br>
 							<!--Grid row-->
-							<button type="submit" class="btn btn-success col-2">Confirmer</button>
+							<button type="submit" class="btn btn-success col-2">Modifier</button>
 						</form>
 						<br>
 
 
 						<!--Grid column-->
-
 						<a th:href="@{/index}">Annuler</a>
-
 					</div>
 			</section>
 			<!--Section: Contact v.2-->

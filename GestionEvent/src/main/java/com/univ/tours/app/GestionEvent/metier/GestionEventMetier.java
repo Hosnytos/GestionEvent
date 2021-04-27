@@ -1,7 +1,9 @@
 package com.univ.tours.app.GestionEvent.metier;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -11,25 +13,24 @@ import com.univ.tours.app.GestionEvent.entities.Personne;
 import com.univ.tours.app.GestionEvent.entities.Reservation;
 
 public interface GestionEventMetier {
-	
+
 	public Evenement consulterEvent(Long id_event);
 	public Personne consulterPersonne(Long id_perso);
 	public Reservation consulterReservation(Long id_res);
-	
+
 	public List<Evenement> listeEvent();
-	
+
 	public void reserverEvent(String type_event ,Long id_perso, Long id_event);
 	public void annulerRes(Long id_res,Long id_perso, Long id_event);
-	
+
 	public void nomPerso(Long id_perso);
-	
-	
-	public void addEvent(String nom_event, String type_event, String description,String localisation, Date date_event, 
-			double prix, int quantite);
+
+	public void addEvent(String nom_event, String type_event, String description,String localisation, LocalDate date_event, 
+			double prix, double quantite);
 	public void updateEvent(Long id_event);
 	public void deleteEvent(Long id_event);
-	
-	
+
+
 	//RECHERCHE
 	public Page<Evenement> rechercheType(String type, int page, int taille);
 	public Page<Evenement> rechercheLoca(String loca, int page, int taille);

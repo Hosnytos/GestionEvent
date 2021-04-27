@@ -1,57 +1,65 @@
 <!DOCTYPE html>
 
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{template.html}">
+	layout:decorate="~{template.html}">
 <head>
 <meta charset="utf-8">
 <title th:text="${evenement.nom_event}"></title>
 <link rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-    crossorigin="anonymous">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
 
 </head>
 <body>
-    <div align="center" layout:fragment="content">
-        <div class="col-md-6">
-            <h2 th:text="${evenement.nom_event}"></h2>
-            <div class="card " th:if="${evenement}">
+	<div align="center" layout:fragment="content">
+		<div class="col-md-6">
+			<h2 th:text="${evenement.nom_event}"></h2>
+			<div class="card " th:if="${evenement}">
 
-                <div class="card-header bg-primary text-white">
-                    Info sur : <label th:text="${evenement.nom_event}"></label>
-                </div>
-                <div class="card-body">
+				<div class="card-header bg-primary text-white">
+					Info sur : <label th:text="${evenement.nom_event}"></label>
+				</div>
+				<div class="card-body">
 
-                    <div>
-                        <label>Titre : </label>
-                        <label th:text="${evenement.nom_event}"></label>
-                    </div>
+					<div>
+						<label>Titre : </label> <label th:text="${evenement.nom_event}"></label>
+					</div>
 
-                    <div>
-                        <label>Date : </label>
-                        <label th:text="${evenement.date_event}"></label>
-                    </div>
-                    <div>
-                        <label>Lieu : </label>
-                        <label th:text="${evenement.localisation}"></label>
-                    </div>
+					<div>
+						<label>Date : </label> <label th:text="${evenement.date_event}"></label>
+					</div>
+					<div>
+						<label>Lieu : </label> <label th:text="${evenement.localisation}"></label>
+					</div>
 
-                    <div>
-                        <label>Description : </label>
-                        <label th:text="${evenement.description}"></label>
-                    </div>
+					<div>
+						<label>Description : </label> <label
+							th:text="${evenement.description}"></label>
+					</div>
 
-                    <div>
-                        <label>Prix : </label>
-                        <label th:text="${evenement.prix}"></label>
-                    </div>
+					<div>
+						<label>Prix : </label> <label th:text="${evenement.prix}"></label>
+					</div>
 
-                    <button class="btn btn-success">Réserver</button>
+					<button class="btn btn-success">Réserver</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+					<td><a
+						th:href="@{/updateEvent/{id_event}(id_event=${evenement.id_event})}"
+						class="btn btn-primary">Modifier</a></td>
+
+					<td><a
+						th:href="@{/deleteEvent/{id_event}(id_event=${evenement.id_event})}"
+						class="btn btn-danger">Supprimer</a></td>
+
+				</div>
+			</div>
+
+		</div>
+		<br> <a th:href="@{/index}">Retour à la page d'accueil</a>
+	</div>
 
 
 

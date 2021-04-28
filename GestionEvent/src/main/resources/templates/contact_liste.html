@@ -37,7 +37,7 @@
 						<td th:text="${contact.sujet}"></td>
 						<td th:text="${contact.date_msg}"></td>
 						<td th:text="${contact.message}"></td>
-						<td><a th:href="@{suppContact(id_contact =${contact.id_contact})}">Supprimer</a></td>
+						<td><a th:href="@{/deleteContact/{id_contact}(id_contact=${contact.id_contact})}">Supprimer</a></td>
 						
 					</tr>
 				</tbody>

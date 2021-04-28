@@ -39,6 +39,8 @@ public class GestionEventController {
 	@Autowired
 	private ContactRepository contactRepository;
 	
+	private boolean test = false;
+	
 	static List<String> listType = null;
 
 	@RequestMapping("/index")
@@ -174,14 +176,16 @@ public class GestionEventController {
 	public String addContact(Model model){
 		Contact contact = new Contact();
 		model.addAttribute("contact", contact);
+		model.addAttribute("test", test);
+		test = false;
 		return "contact";
 	}
 
 	@PostMapping("/saveContact")
-	public String saveContact(@ModelAttribute("contact") Contact contact){
-		//evenementRepo.save(evenement);
+	public String saveContact(@ModelAttribute("contact") Contact contact, Model model){
 		contactRepository.save(contact);
-		//model.addAttribute("evenement", evenement);
+		test = true;
+		model.addAttribute("test", test);
 		return "redirect:/addContact";
 
 	}
@@ -225,5 +229,12 @@ public class GestionEventController {
 		return "redirect:/index";
 	}
 
+	@GetMapping("/deleteContact/{id_contact}")
+	public String deleteContact(@PathVariable(value="id_contact") Long id_contact){
+
+		this.contactRepository.deleteById(id_contact);
+
+		return "redirect:/afficherContact";
+	}
 
 }

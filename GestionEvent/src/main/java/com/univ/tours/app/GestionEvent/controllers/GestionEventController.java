@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +21,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 
 import com.univ.tours.app.GestionEvent.dao.ContactRepository;
 import com.univ.tours.app.GestionEvent.dao.EvenementRepository;
+import com.univ.tours.app.GestionEvent.dao.PersonneRepository;
 import com.univ.tours.app.GestionEvent.entities.Contact;
 import com.univ.tours.app.GestionEvent.entities.Evenement;
+import com.univ.tours.app.GestionEvent.entities.Personne;
 import com.univ.tours.app.GestionEvent.metier.GestionEventMetier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Controller
 @ControllerAdvice
@@ -37,7 +47,11 @@ public class GestionEventController {
 	@Autowired
 	private EvenementRepository evenementRepo;
 	@Autowired
+	private PersonneRepository personneRepo;
+	@Autowired
 	private ContactRepository contactRepository;
+	
+	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	private boolean test = false;
 	
@@ -59,6 +73,21 @@ public class GestionEventController {
 
 	}
 
+	
+	@GetMapping("/register")
+	public String showRegistrationForm(WebRequest request, Model model) {
+	    Personne personne = new Personne();
+	    model.addAttribute("personne", personne);
+	    return "register";
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String register(@ModelAttribute("personne") Personne personne) {
+		String encodedPas = encoder.encode(personne.getMdp());
+		personne.setMdp(encodedPas);
+		personneRepo.save(personne);
+		return "redirect:/index";
+	}
 
 	@RequestMapping("/consulter")
 	public String consulter(Model model,Long id_event){

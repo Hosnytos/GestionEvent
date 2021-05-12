@@ -9,33 +9,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 public class Personne implements Serializable {
 
 	@Id @GeneratedValue
 	private Long idPerso;
 	private int age;
-	private String nom, prenom, email;
-
+	private String nom, prenom, email, mdp;
+	private int role;
+	
 
 	@OneToMany(mappedBy="personne", fetch = FetchType.LAZY)
 	private Collection<Reservation> reservations;
 
-
-
-
+	
 	//CONSTRUCTORS
 	public Personne() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Personne(String nom, String prenom, String email, int age) {
+	public Personne(String nom, String prenom, String email, int age, String mdp) {
 		super();
 		this.age = age;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
+		this.mdp = mdp;
+		role = 0;
 	}
 
 	
@@ -88,121 +91,20 @@ public class Personne implements Serializable {
 		this.reservations = reservations;
 	}
 	
-	
-	
-	
-	
-
-
-	//CONSTRUCTORS
-	/*public Personne() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getMdp() {
+		return mdp;
 	}
 
-
-
-	public Personne(String nom, String prenom, String email,int age) {
-		super();
-		this.age = age;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
 	}
 
-
-
-	//GETTERS & SETTERS
-
-	public Long getIdPerso() {
-		return idPerso;
+	public int getRole() {
+		return role;
 	}
 
-
-
-	public void setIdPerso(Long idPerso) {
-		this.idPerso = idPerso;
+	public void setRole(int role) {
+		this.role = role;
 	}
-
-
-
-	public int getAge() {
-		return age;
-	}
-
-
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-
-
-	public String getNom() {
-		return nom;
-	}
-
-
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-
-
-	public Collection<Evenement> getEvenements() {
-		return evenements;
-	}
-
-
-
-	public void setEvenements(Collection<Evenement> evenements) {
-		this.evenements = evenements;
-	}
-	 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

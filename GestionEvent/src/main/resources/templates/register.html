@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+          integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="d-flex justify-content-center">
+        <section class="mb-2">
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4">Inscrivez-vous</h2>
+            <!--Section description-->
+
+
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-12 ">
+                    <form id="register-form" name="register-form"
+                          th:action="@{/register}" method="post" enctype="utf8"
+                          th:object="${personne}"
+                    >
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form mb-0">
+                                    <label for="nom" class="">Nom</label>
+                                    <input type="text"
+                                           id="nom" name="Nom"
+                                           class="form-control"
+                                           th:field="*{nom}"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid row-->
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form mb-0">
+                                    <label for="prenom" class="">Prénom</label>
+                                    <input type="text"
+                                           id="prenom" name="subject"
+                                           class="form-control"
+                                           th:field="*{prenom}"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid row-->
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form mb-0">
+                                    <label for="email" class="">E-mail</label>
+                                    <input type="email"
+                                           id="email" name="email"
+                                           class="form-control"
+                                           th:field="*{email}"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid row-->
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form mb-0">
+                                    <label for="mdp" class="">Mot de passe</label>
+                                    <input type="password" id="mdp"
+                                           name="mdp" class="form-control"
+                                           th:field="*{mdp}"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid row-->
+
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form mb-0">
+                                    <label for="age" class="" >Âge</label>
+                                    <input type="number" placeholder="18"
+                                           id="age" name="age"
+                                           class="form-control"
+                                           th:field="*{age}"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid row-->
+
+                    </form>
+                    <br>
+
+                    <div class="text-center text-md-left text-white">
+                        <a class="btn btn-primary"
+                           onclick="document.getElementById('register-form').submit();">S'inscrire</a>
+                    </div>
+                    <div class="status"></div>
+                </div>
+                <!--Grid column-->
+
+
+            </div>
+
+        </section>
+    </div>
+</div>
+
+</body>
+</html>

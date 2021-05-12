@@ -11,5 +11,8 @@ public interface PersonneRepository extends JpaRepository<Personne, Long> {
 	
 	@Query("select CONCAT(prenom, ' ' ,nom) from Personne where id_perso=:x")
 	public String nom(@Param("x") Long id_per);
+	
+	@Query("SELECT p from Personne p where p.email like ?1")
+	public Personne findPersonneByEmail(String email);
 
 }

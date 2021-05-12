@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.univ.tours.app.GestionEvent.dao.EvenementRepository;
 import com.univ.tours.app.GestionEvent.dao.PersonneRepository;
@@ -38,12 +39,14 @@ public class GestionEventApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-/*
-		Personne p1 = personneRepository.save(new Personne("Jokic","Paulo","pJokic@cia.com",47));
-		Personne p2 = personneRepository.save(new Personne("Cruz","Jessica","jCruz@gign.fr",28));
-		Personne p3 = personneRepository.save(new Personne("Friedriech","Hansel","fHansel@reich.deu",30));
-*/
-/*		Evenement e1 = evenementRepository.save(new Evenement("Party in Peace", "Festival","Fête démentielle de 3 jours", "Miami",LocalDate.of(2019, 5, 11), 300, 700));
+
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Personne p1 = personneRepository.save(new Personne("Jokic","Paulo","pJokic@cia.com",47, encoder.encode("mdp")));
+		Personne p2 = personneRepository.save(new Personne("Cruz","Jessica","jCruz@gign.fr",28, encoder.encode("mdp")));
+		Personne p3 = personneRepository.save(new Personne("Friedriech","Hansel","fHansel@reich.deu",30, encoder.encode("mdp")));
+
+
+		Evenement e1 = evenementRepository.save(new Evenement("Party in Peace", "Festival","Fête démentielle de 3 jours", "Miami",LocalDate.of(2019, 5, 11), 300, 700));
 		Evenement e2 = evenementRepository.save(new Evenement("Astroworld", "Festival","Travis Scott x Sheck Wes - JackBoys Tour" ,"Houston",LocalDate.of(2018, 7, 18), 175, 3000));
 		Evenement e3 = evenementRepository.save(new Evenement("Barcelona FC - Real Madrid CF", "Match","Finale de la Supercopa organisée par les Émirats arabes unis", "Dubai",LocalDate.of(2021, 10, 21), 340, 60000));
 		Evenement e4 = evenementRepository.save(new Evenement("Black Panther 2 : T'challa's Legacy", "Film","Suite du film Black Panther", "Los Angeles",LocalDate.of(2022, 2, 9), 50, 600));
@@ -56,8 +59,7 @@ public class GestionEventApplication implements CommandLineRunner {
 		Evenement e10 = evenementRepository.save(new Evenement("Vikings : The movie", "Film","Retrouvez vos héros préférés au Valhalla !", "Canada",LocalDate.of(2022, 10, 22), 15, 1300));
 		Evenement e11 = evenementRepository.save(new Evenement("Je suis Alvin", "Manifestation","Rejoignez la marche pour lutter contre le massacre des écureuils en Picardie !", "Paris",LocalDate.of(2021, 11, 1), 0, 200000));
 		Evenement e12 = evenementRepository.save(new Evenement("Ezio’s Family Concert Suite", "Concert","Opéra tirée du jeu vidéo Assassin's Creed II et réalisé par le WDR Funkhausorchester", "Cologne",LocalDate.of(2018, 5, 11), 120, 7000));
-*/
-/*		
+	
 		Reservation res = reservationRepository.save(new Reservation("STANDARD",new Date(),p1,e1));
 		Reservation res2 = reservationRepository.save(new Reservation("VIP",new Date(),p3,e1));
 		Reservation res3 = reservationRepository.save(new Reservation("PREMIUM",new Date(),p2,e2));
@@ -65,7 +67,7 @@ public class GestionEventApplication implements CommandLineRunner {
 		Reservation res5 = reservationRepository.save(new Reservation("STANDARD",new Date(),p3,e1));
 
 		gestionEventMetier.annulerRes(res2.getId_res(), p3.getIdPerso(), e1.getId_event());
-		gestionEventMetier.nomPerso(p1.getIdPerso()); */
+		gestionEventMetier.nomPerso(p1.getIdPerso()); 
 	}
 
 }

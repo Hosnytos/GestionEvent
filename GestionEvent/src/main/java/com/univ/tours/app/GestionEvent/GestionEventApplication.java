@@ -18,6 +18,7 @@ import com.univ.tours.app.GestionEvent.entities.Evenement;
 import com.univ.tours.app.GestionEvent.entities.Personne;
 import com.univ.tours.app.GestionEvent.entities.Reservation;
 import com.univ.tours.app.GestionEvent.metier.GestionEventMetier;
+import com.univ.tours.app.GestionEvent.securingweb.CustomUserDetails;
 
 @SpringBootApplication
 @ComponentScan({"com.univ.tours.app.GestionEvent"})
@@ -31,6 +32,8 @@ public class GestionEventApplication implements CommandLineRunner {
 	private ReservationRepository reservationRepository;
 	@Autowired
 	private GestionEventMetier gestionEventMetier;
+	
+	private CustomUserDetails customUser;
 
 
 	public static void main(String[] args) {
@@ -60,14 +63,15 @@ public class GestionEventApplication implements CommandLineRunner {
 		Evenement e11 = evenementRepository.save(new Evenement("Je suis Alvin", "Manifestation","Rejoignez la marche pour lutter contre le massacre des écureuils en Picardie !", "Paris",LocalDate.of(2021, 11, 1), 0, 200000));
 		Evenement e12 = evenementRepository.save(new Evenement("Ezio’s Family Concert Suite", "Concert","Opéra tirée du jeu vidéo Assassin's Creed II et réalisé par le WDR Funkhausorchester", "Cologne",LocalDate.of(2018, 5, 11), 120, 7000));
 	
-		Reservation res = reservationRepository.save(new Reservation("STANDARD",new Date(),p1,e1));
-		Reservation res2 = reservationRepository.save(new Reservation("VIP",new Date(),p3,e1));
-		Reservation res3 = reservationRepository.save(new Reservation("PREMIUM",new Date(),p2,e2));
-		Reservation res4 = reservationRepository.save(new Reservation("STANDARD",new Date(),p1,e2));
-		Reservation res5 = reservationRepository.save(new Reservation("STANDARD",new Date(),p3,e1));
+		Reservation res = reservationRepository.save(new Reservation(p1,e1));
+		Reservation res2 = reservationRepository.save(new Reservation(p3,e1));
+		Reservation res3 = reservationRepository.save(new Reservation(p2,e2));
+		Reservation res4 = reservationRepository.save(new Reservation(p1,e2));
+		Reservation res5 = reservationRepository.save(new Reservation(p3,e1));
 
 		gestionEventMetier.annulerRes(res2.getId_res(), p3.getIdPerso(), e1.getId_event());
 		gestionEventMetier.nomPerso(p1.getIdPerso()); 
+		//System.out.println(customUser.getUsername());
 	}
 
 }

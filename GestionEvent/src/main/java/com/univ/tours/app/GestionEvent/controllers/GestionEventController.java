@@ -26,10 +26,15 @@ import org.springframework.web.context.request.WebRequest;
 import com.univ.tours.app.GestionEvent.dao.ContactRepository;
 import com.univ.tours.app.GestionEvent.dao.EvenementRepository;
 import com.univ.tours.app.GestionEvent.dao.PersonneRepository;
+import com.univ.tours.app.GestionEvent.dao.ReservationRepository;
 import com.univ.tours.app.GestionEvent.entities.Contact;
 import com.univ.tours.app.GestionEvent.entities.Evenement;
 import com.univ.tours.app.GestionEvent.entities.Personne;
+import com.univ.tours.app.GestionEvent.entities.Reservation;
 import com.univ.tours.app.GestionEvent.metier.GestionEventMetier;
+import com.univ.tours.app.GestionEvent.securingweb.CustomUserDetails;
+import com.univ.tours.app.GestionEvent.securingweb.CustomUserDetailsService;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -49,12 +54,15 @@ public class GestionEventController {
 	@Autowired
 	private PersonneRepository personneRepo;
 	@Autowired
+	private ReservationRepository reservationRepo;
+	@Autowired
 	private ContactRepository contactRepository;
-	
+
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	
+	private CustomUserDetails customUser;
+
 	private boolean test = false;
-	
+
 	static List<String> listType = null;
 
 	@RequestMapping("/index")
@@ -73,12 +81,12 @@ public class GestionEventController {
 
 	}
 
-	
+
 	@GetMapping("/register")
 	public String showRegistrationForm(WebRequest request, Model model) {
-	    Personne personne = new Personne();
-	    model.addAttribute("personne", personne);
-	    return "register";
+		Personne personne = new Personne();
+		model.addAttribute("personne", personne);
+		return "register";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -246,7 +254,7 @@ public class GestionEventController {
 		model.addAttribute("evenement", evenement);
 
 		this.evenementRepo.deleteById(id_event);
-		
+
 		return "evenement_update";
 	}
 
@@ -265,5 +273,76 @@ public class GestionEventController {
 
 		return "redirect:/afficherContact";
 	}
+/*
+	@GetMapping("/addReservation")
+	public String addReservation(@PathVariable(value="id_event") Long id_event, Model model){
+		try {
+			//ON rcup user
+			String emailUser = customUser.getUsername(); 
+
+			Personne personne = personneRepo.findPersonneByEmail(emailUser);
+			 
+			//On récupère l'événement
+			Evenement evenement = evenementRepo.searchEventId(id_event);
+
+			//set événement as model attribute
+			//reservationRepo.save(new Reservation(personne, evenement));
+			
+			Reservation reservation = new Reservation(personne, evenement);
+			model.addAttribute("reservation", reservation);
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("exception", e);
+		}
+
+		return "reservation_add";
+
+	}
+
+	@PostMapping("/saveReservation")
+	public String saveReservation(@ModelAttribute("reservation") Reservation reservation ){
+		reservationRepo.save(reservation);
+		//gestionEventMetier.addEvent(evenement);
+		//model.addAttribute("evenement", evenement);
+		return "redirect:/index";
+
+	}
+*/
+	
+	@GetMapping("/saveReservation")
+	public String saveReservation(@RequestParam( value="id_event") String id_event, Model model){
+		try {
+			//ON récupère l'utilisateur connecté
+			String emailUser = SecurityContextHolder.getContext().getAuthentication().getName();	
+
+			Personne personne = personneRepo.findPersonneByEmail(emailUser);
+			 
+			//On récupère l'événement
+			Long id = Long.valueOf(id_event).longValue();
+			
+			Evenement evenement = evenementRepo.searchEventId(id);
+			System.out.println("=============" + id + "=========");
+			System.out.println("=============" + id_event + "=========");
+			//set événement as model attribute
+			//reservationRepo.save(new Reservation(personne, evenement));
+			
+			Reservation reservation = new Reservation(personne, evenement);
+			//model.addAttribute("test", test);
+			//test = false;
+			reservationRepo.save(reservation);
+			test = true;
+			System.out.println("==========="+ test + "===========");
+			model.addAttribute("test", test);
+			test = false;
+			System.out.println("==========="+ test + "===========");
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("exception", e);
+		}
+
+		return "redirect:/consulter?id_event="+ id_event;
+
+	}
+	
 
 }

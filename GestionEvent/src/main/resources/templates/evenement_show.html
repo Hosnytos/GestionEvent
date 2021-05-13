@@ -15,12 +15,17 @@
 	<div align="center" layout:fragment="content">
 		<div class="col-md-6">
 			<h2 th:text="${evenement.nom_event}"></h2>
+				                    
 			<div class="card " th:if="${evenement}">
 
 				<div class="card-header bg-primary text-white">
 					Info sur : <label th:text="${evenement.nom_event}"></label>
 				</div>
 				<div class="card-body">
+				
+					<div>
+						<label>Id : </label> <label th:text="${evenement.id_event}"></label>
+					</div>
 
 					<div>
 						<label>Titre : </label> <label th:text="${evenement.nom_event}"></label>
@@ -42,13 +47,18 @@
 						<label>Prix : </label> <label th:text="${evenement.prix}"></label>
 					</div>
 
-					<div sec:authorize="isAuthenticated()">
-                        <button class="btn btn-success">Réserver</button>
-                    </div>
+					<form th:action="@{/saveReservation}"
+							method="GET">
+						<div sec:authorize="isAuthenticated()">
+							<Button type="submit"  th:value="${evenement.id_event}" name="id_event"
+								class="btn btn-success col-2">Réserver
+							</Button>
+	                      
+	                    </div>
 
+					</form>
 
                     <div sec:authentication="name">
-                                qdmkflkdjf
                     </div>
 					<!-- ><button class="btn btn-success">Réserver</button>  -->
 
@@ -64,9 +74,12 @@
 
 				</div>
 			</div>
-
+			<br>
+			<p th:if="${test}" class="alert alert-success" role="alert">
+							Votre réservation a bien été effectué.</p>
 		</div>
 		<br> <a th:href="@{/index}">Retour à la page d'accueil</a>
+		
 	</div>
 
 

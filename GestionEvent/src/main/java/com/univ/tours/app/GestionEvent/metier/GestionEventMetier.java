@@ -20,7 +20,7 @@ public interface GestionEventMetier {
 
 	public List<Evenement> listeEvent();
 
-	public void reserverEvent(String type_event ,Long id_perso, Long id_event);
+	public void reserverEvent(Long id_perso, Long id_event);
 	public void annulerRes(Long id_res,Long id_perso, Long id_event);
 
 	public void nomPerso(Long id_perso);

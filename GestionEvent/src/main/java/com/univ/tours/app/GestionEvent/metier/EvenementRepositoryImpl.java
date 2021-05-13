@@ -62,7 +62,7 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 
 	//RESERVATION
 	@Override
-	public void reserverEvent(String type_event ,Long id_perso, Long id_event) {
+	public void reserverEvent(Long id_perso, Long id_event) {
 		Personne p = consulterPersonne(id_perso);
 		Evenement e = consulterEvent(id_event);
 		
@@ -70,7 +70,7 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 		verifQant = e.getQuantite();
 		
 		if(verifQant <= 0) throw new RuntimeException("Il n'y a plus de place pour cet événement");
-		Reservation res = reservationRepository.save(new Reservation(type_event, new Date(), p, e));
+		Reservation res = reservationRepository.save(new Reservation(p, e));
 		e.setQuantite(e.getQuantite()-1);
 		
 	}

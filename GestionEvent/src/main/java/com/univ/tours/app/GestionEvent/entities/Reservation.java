@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,9 +13,9 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Reservation implements Serializable {
 	
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_res;
-	private String type_res;
 	private Date date_res;
 	
 	@ManyToOne
@@ -33,10 +34,9 @@ public class Reservation implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reservation(String type_res, Date date_res, Personne personne, Evenement evenement) {
+	public Reservation(Personne personne, Evenement evenement) {
 		super();
-		this.type_res = type_res;
-		this.date_res = date_res;
+		this.date_res = new Date();
 		this.personne = personne;
 		this.evenement = evenement;
 	}
@@ -49,14 +49,6 @@ public class Reservation implements Serializable {
 
 	public void setId_res(Long id_res) {
 		this.id_res = id_res;
-	}
-
-	public String getType_res() {
-		return type_res;
-	}
-
-	public void setType_res(String type_res) {
-		this.type_res = type_res;
 	}
 
 	public Date getDate_res() {

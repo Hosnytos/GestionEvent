@@ -2,12 +2,17 @@ package com.univ.tours.app.GestionEvent.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,10 +25,18 @@ public class Personne implements Serializable {
 	private Long idPerso;
 	private int age;
 	private String nom, prenom, email, mdp;
-	private int role;
+	
+	//private int role;
+	/*@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "idPerso")},
+	inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "id_role")})
+	private List<Role> roles;*/
+	@ManyToMany
+	@JoinTable(name="USERS_ROLES")
+	private Collection<Role> roles;
 	
 
-	@OneToMany(mappedBy="personne", fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="personne", fetch = FetchType.LAZY)
 	private Collection<Reservation> reservations;
 
 	
@@ -40,7 +53,8 @@ public class Personne implements Serializable {
 		this.prenom = prenom;
 		this.email = email;
 		this.mdp = mdp;
-		role = 0;
+		//this.roles.add(new Role("USER"));
+		//role = 0;
 	}
 
 	
@@ -101,6 +115,16 @@ public class Personne implements Serializable {
 		this.mdp = mdp;
 	}
 
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	
+	
+/*
 	public int getRole() {
 		return role;
 	}
@@ -108,5 +132,5 @@ public class Personne implements Serializable {
 	public void setRole(int role) {
 		this.role = role;
 	}
-
+*/
 }

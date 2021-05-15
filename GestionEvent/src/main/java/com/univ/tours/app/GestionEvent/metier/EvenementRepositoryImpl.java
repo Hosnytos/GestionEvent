@@ -16,13 +16,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.univ.tours.app.GestionEvent.dao.EvenementRepository;
 import com.univ.tours.app.GestionEvent.dao.PersonneRepository;
 import com.univ.tours.app.GestionEvent.dao.ReservationRepository;
+import com.univ.tours.app.GestionEvent.dao.RoleRepository;
 import com.univ.tours.app.GestionEvent.entities.Evenement;
 import com.univ.tours.app.GestionEvent.entities.Personne;
 import com.univ.tours.app.GestionEvent.entities.Reservation;
+import com.univ.tours.app.GestionEvent.entities.Role;
 
 @Service
 @Transactional
@@ -34,6 +37,28 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 	private PersonneRepository personneRepository;
 	@Autowired
 	private ReservationRepository reservationRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	//Role
+	@RequestMapping(value="findRoles")
+	public List<Role> findAll(){
+		return roleRepository.findAll();
+	}
+	
+	@RequestMapping(value="saveRole")
+	public Role save(Role role) {
+		return roleRepository.save(role);
+	}
+	
+	@RequestMapping(value="newUserRole")
+	public Personne saveRole(String email, String nom) {
+		Personne p = personneRepository.findPersonneByEmail(email);
+		Role r = roleRepository.findByName(nom);
+		p.getRoles().add(r);personneRepository.save(p);
+		return p;
+	}
+	
 	
 	//CONSULTER
 	@Override
@@ -155,6 +180,7 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 		return evenementRepository.searchEvent(nom_event);
 		
 	}
+
 
 
 	

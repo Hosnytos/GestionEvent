@@ -329,7 +329,8 @@ public class GestionEventController {
 			Reservation reservation = new Reservation(personne, evenement);
 			//model.addAttribute("test", test);
 			//test = false;
-			reservationRepo.save(reservation);
+			//reservationRepo.save(reservation);
+			gestionEventMetier.reserverEvent(personne.getIdPerso(), evenement.getId_event());
 			test = true;
 			System.out.println("==========="+ test + "===========");
 			model.addAttribute("test", test);
@@ -344,5 +345,58 @@ public class GestionEventController {
 
 	}
 	
+	@RequestMapping("/consulterCompte")
+	public String consulterCompte(Model model){
 
+		try {
+			String emailUser = SecurityContextHolder.getContext().getAuthentication().getName();	
+
+			Personne personne = personneRepo.findPersonneByEmail(emailUser);
+			personne = gestionEventMetier.consulterPersonne(personne.getIdPerso());
+			model.addAttribute("personne", personne);
+
+		} catch (Exception e) {
+			model.addAttribute("excection",e);
+		}
+
+		return "personne_show";
+
+	}
+
+	@GetMapping("/editCompte/{idPerso}")
+	public String editCompte(@PathVariable(value="idPerso") Long idPerso , Model model){
+
+		//On récupère la personne
+		String emailUser = SecurityContextHolder.getContext().getAuthentication().getName();	
+
+		Personne personne = personneRepo.findPersonneByEmail(emailUser);
+		personne = gestionEventMetier.consulterPersonne(personne.getIdPerso());
+		model.addAttribute("personne", personne);
+
+
+		return "personne_edit";
+	}
+	
+	@RequestMapping("/afficherReservation")
+	public String afficherReservation(Model model, @RequestParam(name="page", defaultValue = "0") int p, @RequestParam(name="size", defaultValue = "5") int s){
+
+		try {
+			//List<Contact> e = contactRepository.findAll();
+			//model.addAttribute("listContact",e);
+
+			Page<Reservation> pageReservation = reservationRepo.findAll(PageRequest.of(p, s));
+			model.addAttribute("listReservation", pageReservation.getContent());
+			int [] pages = new int[pageReservation.getTotalPages()];
+			model.addAttribute("pages", pages);
+			model.addAttribute("size", s);
+			model.addAttribute("pageCourante", p);
+
+		} catch (Exception e) {
+			model.addAttribute("excection",e);
+		}
+
+		return "reservation_show";
+
+	}
+	
 }

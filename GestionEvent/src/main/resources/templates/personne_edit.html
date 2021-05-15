@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{template.html}">
+<head>
+<meta charset="UTF-8">
+<title>Modifier mes informations</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+	integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div layout:fragment="content" align="center">
+		<div class="container ">
+			<!--Section: Contact v.2-->
+			<section class="mb-4 ">
+
+				<!--Section heading-->
+				<h2 class="h1-responsive font-weight-bold text-center my-4">Modifier
+					mes informations</h2>
+				<!--Section description-->
+
+				<div class="row">
+
+					<!--Grid column-->
+					<div class="col-md-12 mb-md-0 mb-5">
+						<form th:action="@{/register}" th:object="${personne}"
+							method="POST">
+
+							<!-- Add hidden form field to handle update -->
+							<input type="hidden" th:value="*{idPerso}" />
+
+							<!--Grid row-->
+							<div class="row">
+
+								<!--Grid column-->
+								<div class="col-md-6">
+									<div class="md-form mb-0">
+										<label for="name" class="">Nom</label> <input
+											type="text" id="nom" name="nom"
+											class="form-control" th:value="*{nom}">
+
+									</div>
+								</div>
+								<!--Grid column-->
+
+								<!--Grid column-->
+								<div class="col-md-6">
+									<div class="md-form mb-0">
+										<label for="email" class="">Prénom</label> <input
+											type="text" id="prenom" name="prenom"
+											class="form-control" th:value="*{prenom}">
+									</div>
+								</div>
+								<!--Grid column-->
+
+							</div>
+
+
+							<!--Grid row-->
+							<div class="row">
+
+								<!--Grid column-->
+								<div class="col-md-6">
+									<div class="md-form mb-0">
+										<label for="name" class="">Âge</label> <input
+											type="text" id="age" name="age"
+											class="form-control" th:value="*{age}">
+
+									</div>
+								</div>
+								<!--Grid column-->
+
+								<!--Grid column-->
+								<div class="col-md-6">
+									<div class="md-form mb-0">
+										<label for="email" class="">Email</label> <input type="text"
+											id="email" name="email" class="form-control"
+											th:value="*{email}">
+									</div>
+								</div>
+								<!--Grid column-->
+
+							</div>
+
+
+
+							<!--Grid row-->
+							<div class="row">
+
+								<!--Grid column-->
+								<div class="col-md-6">
+									<div class="md-form mb-0">
+										<label for="name" class="">Mot de passe</label> <input type="text"
+											id="mdp" name="mdp" class="form-control" th:value="*{mdp}">
+
+									</div>
+								</div>
+								<!--Grid column-->
+
+							</div>
+
+							<br>
+							<!--Grid row-->
+							<button type="submit" class="btn btn-success col-2">Modifier</button>
+						</form>
+						<br>
+
+
+					</div>
+			</section>
+			<!--Section: Contact v.2-->
+		</div>
+	</div>
+
+</body>
+</html>

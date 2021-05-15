@@ -14,9 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.univ.tours.app.GestionEvent.dao.EvenementRepository;
 import com.univ.tours.app.GestionEvent.dao.PersonneRepository;
 import com.univ.tours.app.GestionEvent.dao.ReservationRepository;
+import com.univ.tours.app.GestionEvent.dao.RoleRepository;
 import com.univ.tours.app.GestionEvent.entities.Evenement;
 import com.univ.tours.app.GestionEvent.entities.Personne;
 import com.univ.tours.app.GestionEvent.entities.Reservation;
+import com.univ.tours.app.GestionEvent.entities.Role;
 import com.univ.tours.app.GestionEvent.metier.GestionEventMetier;
 import com.univ.tours.app.GestionEvent.securingweb.CustomUserDetails;
 
@@ -32,6 +34,8 @@ public class GestionEventApplication implements CommandLineRunner {
 	private ReservationRepository reservationRepository;
 	@Autowired
 	private GestionEventMetier gestionEventMetier;
+	@Autowired
+	private RoleRepository roleRepository;
 	
 	private CustomUserDetails customUser;
 
@@ -44,10 +48,20 @@ public class GestionEventApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Role role1 = roleRepository.save(new Role("USER"));
+		Role role2 = roleRepository.save(new Role("ADMIN"));
+		
 		Personne p1 = personneRepository.save(new Personne("Jokic","Paulo","pJokic@cia.com",47, encoder.encode("mdp")));
+		//p1.getRoles().add(role1);
+		//p1.getRoles().add(role2);
 		Personne p2 = personneRepository.save(new Personne("Cruz","Jessica","jCruz@gign.fr",28, encoder.encode("mdp")));
+		//p2.getRoles().add(role2);
 		Personne p3 = personneRepository.save(new Personne("Friedriech","Hansel","fHansel@reich.deu",30, encoder.encode("mdp")));
-
+		//p3.getRoles().add(role1);
+		gestionEventMetier.saveRole("jCruz@gign.fr", "ADMIN");
+		gestionEventMetier.saveRole("jCruz@gign.fr", "USER");
+		gestionEventMetier.saveRole("pJokic@cia.com", "USER");
+		gestionEventMetier.saveRole("fHansel@reich.deu", "USER");
 
 		Evenement e1 = evenementRepository.save(new Evenement("Party in Peace", "Festival","Fête démentielle de 3 jours", "Miami",LocalDate.of(2019, 5, 11), 300, 700));
 		Evenement e2 = evenementRepository.save(new Evenement("Astroworld", "Festival","Travis Scott x Sheck Wes - JackBoys Tour" ,"Houston",LocalDate.of(2018, 7, 18), 175, 3000));

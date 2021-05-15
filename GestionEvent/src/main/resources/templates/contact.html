@@ -20,13 +20,17 @@
 			<!--Section: Contact v.2-->
 			<section class="mb-4">
 
+							<div th:if="${test}" class="alert alert-success text-center" role="alert">
+								Votre message a bien été transmis à nos équipes, nous vous
+								répondrons dans les plus brefs délais.</div>
+
 				<!--Section heading-->
 				<h2 class="h1-responsive font-weight-bold text-center my-4">Contactez
 					nous</h2>
 				<!--Section description-->
 				<p class="text-center w-responsive mx-auto mb-5">Vous avez des
-					questions? N'hesitez pas de nous contacter. Nous nous engageons à
-					vous repondre le plus rapidement possible.</p>
+					questions? N'hésitez pas à nous contacter. Nous nous engageons à
+					vous répondre dans les plus brefs délais.</p>
 
 				<div class="row">
 
@@ -42,7 +46,7 @@
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<label for="name" class="">Votre Nom | Prénom</label> <input
-											type="text" id="name" name="nom" class="form-control"
+											type="text" required="true" id="name" name="nom" class="form-control"
 											th:value="*{nom}">
 
 									</div>
@@ -53,7 +57,7 @@
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<label for="email" class="">Email</label> <input type="text"
-											id="email" name="email" class="form-control"
+											id="email" required="true" name="email" class="form-control"
 											th:value="*{email}">
 									</div>
 								</div>
@@ -67,7 +71,7 @@
 								<div class="col-md-12">
 									<div class="md-form mb-0">
 										<label for="subject" class="">Sujet</label> <input type="text"
-											id="sujet" name="sujet" class="form-control"
+											id="sujet" name="sujet" required="true" class="form-control"
 											th:value="*{sujet}">
 									</div>
 								</div>
@@ -82,7 +86,7 @@
 
 									<div class="md-form">
 										<label for="message">Votre message</label>
-										<textarea type="text" id="message" name="message" rows="2"
+										<textarea type="text" required="true" id="message" name="message" rows="2"
 											class="form-control md-textarea" th:value="*{message}"></textarea>
 
 									</div>
@@ -100,7 +104,7 @@
 
 									<div class="md-form">
 										<label for="date_msg">Date</label> <input type="date"
-											id="date_msg" name="date_msg" rows="2"
+											id="date_msg" required="true" name="date_msg" rows="2"
 											class="form-control md-date" th:value="*{date_msg}" />
 
 									</div>
@@ -112,12 +116,7 @@
 							<!--Grid row-->
 							<button type="submit" class="btn btn-success col-2">Confirmer</button>
 						</form>
-						<br>
-						<div th:if="${test}" class="alert alert-success" role="alert">
-							Votre message a bien été transmis à nos équipes, nous vous
-							répondrons dans les plus brefs délais.</div>
-
-
+					
 
 						<div class="status"></div>
 					</div>

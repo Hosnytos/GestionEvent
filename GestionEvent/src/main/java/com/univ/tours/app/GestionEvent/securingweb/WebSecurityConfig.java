@@ -50,7 +50,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 	.logoutUrl("/logout")
                 	.logoutSuccessUrl("/index")
                 	.permitAll();
-
+    	
+    	
+    /*	http.authorizeRequests()
+    	.antMatchers("/index").hasAnyAuthority("ADMIN");*/
+    	
+    	
         
         //http.authorizeRequests().antMatchers("/index").hasRole("USER");
     }

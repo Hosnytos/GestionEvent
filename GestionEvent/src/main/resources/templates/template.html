@@ -46,9 +46,10 @@
 		    
 		    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 		        <ul class="navbar-nav ml-auto">
-		            <li class="nav-item"><a class="nav-link" th:href="@{/login}">Connexion</a>
-		            <li class="nav-item"><a class="nav-link" th:href="@{/register}">S'inscrire</a>
-		            <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a>
+		            <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/login}"><i class="fas fa-sign-out-alt"></i> Connexion</a>
+		            <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/register}"><i class="fas fa-user-plus"></i> S'inscrire</a>
+		            <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/consulterCompte}"><i class="fas fa-user-circle"></i> Mon Compte</a>
+		            <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
 		            <li class="nav-item">
 		                <a class="nav-link" href="https://github.com/humazuhair/Application-e-billet"><i class="fab fa-git-square fa-2x"></i></a>
 		            </li>
@@ -70,7 +71,7 @@
 	<!-- FOOTER -->
 	<footer>
 		<div class="navbar fixed-bottom">
-			<small>@Gestions événements - TOURS </small>
+			<small>© G-EVENT - TOURS </small>
 		</div>
 	</footer>
 

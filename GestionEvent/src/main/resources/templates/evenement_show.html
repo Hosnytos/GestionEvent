@@ -2,6 +2,7 @@
 
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{template.html}">
+	
 <head>
 <meta charset="utf-8">
 <title th:text="${evenement.nom_event}"></title>
@@ -57,18 +58,23 @@
 	                    </div>
 
 					</form>
-
-                    <div sec:authentication="name">
+					
+					<br>
+                    <div sec:authorize="!isAuthenticated()">
+                    	<a
+							th:href="@{/login}">Connectez-vous pour réserver !</a>
                     </div>
 					<!-- ><button class="btn btn-success">Réserver</button>  -->
 
 
 
 					<td><a
+					sec:authorize="hasRole('ROLE_ADMIN')"
 						th:href="@{/updateEvent/{id_event}(id_event=${evenement.id_event})}"
 						class="btn btn-primary">Modifier</a></td>
 
 					<td><a
+					sec:authorize="hasRole('ROLE_ADMIN')"
 						th:href="@{/deleteEvent/{id_event}(id_event=${evenement.id_event})}"
 						class="btn btn-danger">Supprimer</a></td>
 

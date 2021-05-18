@@ -14,7 +14,7 @@
 <body>
 
 <div layout:fragment="content">
-    <div class="d-flex justify-content-center">
+    <div align="center" class="d-flex justify-content-center">
         <section class="mb-2">
             <!--Section heading-->
             <h2 class="h1-responsive font-weight-bold my-4">Inscrivez-vous</h2>
@@ -107,6 +107,13 @@
                         <a class="btn btn-primary"
                            onclick="document.getElementById('register-form').submit();">S'inscrire</a>
                     </div>
+                    
+                    <br>
+                    <div>
+                    	<a
+							th:href="@{/login}">Déjà inscrit ? Connectez-vous !</a>
+                    </div>
+                    
                     <div class="status"></div>
                 </div>
                 <!--Grid column-->

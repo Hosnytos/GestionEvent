@@ -42,6 +42,7 @@ import com.univ.tours.app.GestionEvent.securingweb.CustomUserDetailsService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -248,7 +249,7 @@ public class GestionEventController {
 		return "redirect:/index";
 
 	}
-
+	
 	@GetMapping("/updateEvent/{id_event}")
 	public String updateEvent(@PathVariable(value="id_event") Long id_event , Model model){
 
@@ -405,7 +406,7 @@ public class GestionEventController {
 
 	}
 	
-	@RequestMapping("/getLogedUser")
+	@RequestMapping(value ="/getLogedUser")
 	public Map<String, Object> getLogedUser(HttpServletRequest httpServlet){
 		
 		HttpSession httpSession = httpServlet.getSession();

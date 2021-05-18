@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		    		.dataSource(dataSource)
 		    			.usersByUsernameQuery("select email as principal, mdp as credentials, true from personne where email = ?")
 		    			.authoritiesByUsernameQuery("select personnes_id_perso as principal, roles_id_role as role from users_roles where personnes_id_perso = ?")
-		    			.rolePrefix("ROLE_");
+		    			;
     	
     	/*authenticationManager
         .inMemoryAuthentication()

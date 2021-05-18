@@ -48,8 +48,8 @@ public class GestionEventApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 /*
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Role role1 = roleRepository.save(new Role("USER"));
-		Role role2 = roleRepository.save(new Role("ADMIN"));
+		Role role1 = roleRepository.save(new Role("ROLE_USER"));
+		Role role2 = roleRepository.save(new Role("ROLE_ADMIN"));
 		
 		Personne p1 = personneRepository.save(new Personne("Jokic","Paulo","pJokic@cia.com",47, encoder.encode("mdp")));
 		//p1.getRoles().add(role1);
@@ -61,6 +61,7 @@ public class GestionEventApplication implements CommandLineRunner {
 		gestionEventMetier.saveRole("jCruz@gign.fr", "ADMIN");
 		gestionEventMetier.saveRole("jCruz@gign.fr", "USER");
 		gestionEventMetier.saveRole("pJokic@cia.com", "USER");
+		gestionEventMetier.saveRole("pJokic@cia.com", "ADMIN");
 		gestionEventMetier.saveRole("fHansel@reich.deu", "USER");
 
 		Evenement e1 = evenementRepository.save(new Evenement("Party in Peace", "Festival","Fête démentielle de 3 jours", "Miami",LocalDate.of(2019, 5, 11), 300, 700));

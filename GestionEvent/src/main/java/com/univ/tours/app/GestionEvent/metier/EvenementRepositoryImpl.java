@@ -56,7 +56,8 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 	public Personne saveRole(String email, String nom) {
 		Personne p = personneRepository.findPersonneByEmail(email);
 		Role r = roleRepository.findByName(nom);
-		p.getRoles().add(r);personneRepository.save(p);
+		p.getRoles().add(r);
+		personneRepository.save(p);
 		return p;
 	}
 	

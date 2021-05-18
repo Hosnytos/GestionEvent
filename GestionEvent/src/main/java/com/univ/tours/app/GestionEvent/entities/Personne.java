@@ -31,7 +31,7 @@ public class Personne implements Serializable {
 	@JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "idPerso")},
 	inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "id_role")})
 	private List<Role> roles;*/
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="USERS_ROLES")
 	private Collection<Role> roles;
 	
@@ -119,9 +119,11 @@ public class Personne implements Serializable {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
+
+	
 	
 	
 /*

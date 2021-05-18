@@ -4,11 +4,15 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +43,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -397,6 +403,24 @@ public class GestionEventController {
 
 		return "reservation_show";
 
+	}
+	
+	@RequestMapping("/getLogedUser")
+	public Map<String, Object> getLogedUser(HttpServletRequest httpServlet){
+		
+		HttpSession httpSession = httpServlet.getSession();
+		SecurityContext secuContxt = (SecurityContext) httpSession.getAttribute("SPRING_SECURITY_CONTEXT");
+		String emailUser = secuContxt.getAuthentication().getName();
+		List<String> roles = new ArrayList<>();
+		for(GrantedAuthority ga:secuContxt.getAuthentication().getAuthorities()) {
+			roles.add(ga.getAuthority());
+		}
+		Map<String, Object> params = new HashMap<>();
+		params.put("email", emailUser);
+		params.put("roles", roles);
+		
+		return params;
+		
 	}
 	
 }

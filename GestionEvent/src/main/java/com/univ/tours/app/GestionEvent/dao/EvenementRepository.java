@@ -17,7 +17,6 @@ import com.univ.tours.app.GestionEvent.entities.Evenement;
 
 public interface EvenementRepository extends JpaRepository<Evenement, Long> {
 	
-	
 	@Query("select e from Evenement e where e.id_event=:x")
 	public Page<Evenement> listEvenPage(@Param("x") Long id_event, Pageable pageable);
 	

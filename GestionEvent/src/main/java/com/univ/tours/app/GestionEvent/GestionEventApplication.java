@@ -46,7 +46,7 @@ public class GestionEventApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
+/*
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Role role1 = roleRepository.save(new Role("USER"));
 		Role role2 = roleRepository.save(new Role("ADMIN"));
@@ -85,7 +85,7 @@ public class GestionEventApplication implements CommandLineRunner {
 
 		gestionEventMetier.annulerRes(res2.getId_res(), p3.getIdPerso(), e1.getId_event());
 		gestionEventMetier.nomPerso(p1.getIdPerso()); 
-		//System.out.println(customUser.getUsername());
+		//System.out.println(customUser.getUsername());*/
 	}
 
 }

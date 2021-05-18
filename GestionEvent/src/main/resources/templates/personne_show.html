@@ -39,6 +39,11 @@
 						<label>Email : </label> <label
 							th:text="${personne.email}"></label>
 					</div>
+					
+					<div>
+						<label>Rôle : </label>
+						<label sec:authentication="principal.authorities" ></label>
+					</div>
 					<br>
 
 					<td><a
@@ -53,7 +58,7 @@
 			</div>
 			 -->
 		</div>
-		<br> <a th:href="@{/afficherReservation}">Mes réservations</a>
+<!--		<br> <a th:href="@{/afficherReservation}">Mes réservations</a>  -->
 		
 		<br> <a th:href="@{/index}">Retour à la page d'accueil</a>
 		

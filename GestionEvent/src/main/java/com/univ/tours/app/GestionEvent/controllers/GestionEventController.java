@@ -31,10 +31,12 @@ import com.univ.tours.app.GestionEvent.dao.ContactRepository;
 import com.univ.tours.app.GestionEvent.dao.EvenementRepository;
 import com.univ.tours.app.GestionEvent.dao.PersonneRepository;
 import com.univ.tours.app.GestionEvent.dao.ReservationRepository;
+import com.univ.tours.app.GestionEvent.dao.RoleRepository;
 import com.univ.tours.app.GestionEvent.entities.Contact;
 import com.univ.tours.app.GestionEvent.entities.Evenement;
 import com.univ.tours.app.GestionEvent.entities.Personne;
 import com.univ.tours.app.GestionEvent.entities.Reservation;
+import com.univ.tours.app.GestionEvent.entities.Role;
 import com.univ.tours.app.GestionEvent.metier.GestionEventMetier;
 import com.univ.tours.app.GestionEvent.securingweb.CustomUserDetails;
 import com.univ.tours.app.GestionEvent.securingweb.CustomUserDetailsService;
@@ -64,6 +66,8 @@ public class GestionEventController {
 	private ReservationRepository reservationRepo;
 	@Autowired
 	private ContactRepository contactRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	private CustomUserDetails customUser;
@@ -98,6 +102,7 @@ public class GestionEventController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(@ModelAttribute("personne") Personne personne) {
+		Role roleU = roleRepository.findByName("ROLE_USER");
 		String encodedPas = encoder.encode(personne.getMdp());
 		personne.setMdp(encodedPas);
 		personneRepo.save(personne);

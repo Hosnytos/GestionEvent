@@ -24,7 +24,7 @@
 				</div>
 				<div class="card-body">
 				
-					<div>
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
 						<label>Id : </label> <label th:text="${evenement.id_event}"></label>
 					</div>
 
@@ -46,6 +46,10 @@
 
 					<div>
 						<label>Prix : </label> <label th:text="${evenement.prix}"></label>
+					</div>
+					
+					<div>
+						<label>Quantité : </label> <label th:text="${evenement.quantite}"></label>
 					</div>
 
 					<form th:action="@{/saveReservation}"

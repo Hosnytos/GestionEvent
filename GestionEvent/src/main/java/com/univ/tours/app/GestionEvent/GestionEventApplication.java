@@ -58,11 +58,11 @@ public class GestionEventApplication implements CommandLineRunner {
 		//p2.getRoles().add(role2);
 		Personne p3 = personneRepository.save(new Personne("Friedriech","Hansel","fHansel@reich.deu",30, encoder.encode("mdp")));
 		//p3.getRoles().add(role1);
-		gestionEventMetier.saveRole("jCruz@gign.fr", "ADMIN");
-		gestionEventMetier.saveRole("jCruz@gign.fr", "USER");
-		gestionEventMetier.saveRole("pJokic@cia.com", "USER");
-		gestionEventMetier.saveRole("pJokic@cia.com", "ADMIN");
-		gestionEventMetier.saveRole("fHansel@reich.deu", "USER");
+		gestionEventMetier.saveRole("jCruz@gign.fr", "ROLE_ADMIN");
+		gestionEventMetier.saveRole("jCruz@gign.fr", "ROLE_USER");
+		gestionEventMetier.saveRole("pJokic@cia.com", "ROLE_USER");
+		gestionEventMetier.saveRole("pJokic@cia.com", "ROLE_ADMIN");
+		gestionEventMetier.saveRole("fHansel@reich.deu", "ROLE_USER");
 
 		Evenement e1 = evenementRepository.save(new Evenement("Party in Peace", "Festival","Fête démentielle de 3 jours", "Miami",LocalDate.of(2019, 5, 11), 300, 700));
 		Evenement e2 = evenementRepository.save(new Evenement("Astroworld", "Festival","Travis Scott x Sheck Wes - JackBoys Tour" ,"Houston",LocalDate.of(2018, 7, 18), 175, 3000));

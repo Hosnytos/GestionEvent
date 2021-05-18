@@ -40,7 +40,7 @@
 							th:text="${personne.email}"></label>
 					</div>
 					
-					<div>
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
 						<label>Rôle : </label>
 						<label sec:authentication="principal.authorities" ></label>
 					</div>

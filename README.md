@@ -1,5 +1,12 @@
 # Application-e-billet : G-EVENT 
 
+
+* Membre du groupe :
+  * DIOUF Mohamed
+  * NAIYA DEMOKOLO Hosny
+  * NAIYA NABINA Jordy
+  * ZUHAIR Huma
+
 Application de gestion des billets d’événements proposés par une ville
 
 2 profils : utilisateur, administrateur

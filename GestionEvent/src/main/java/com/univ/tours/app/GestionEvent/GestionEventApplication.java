@@ -78,7 +78,7 @@ public class GestionEventApplication implements CommandLineRunner {
 		Reservation res2 = reservationRepository.save(new Reservation(p3,e1));
 		Reservation res3 = reservationRepository.save(new Reservation(p2,e2));
 		Reservation res4 = reservationRepository.save(new Reservation(p1,e2));
-		Reservation res5 = reservationRepository.save(new Reservation(p3,e1));
+		Reservation res5 = reservationRepository.save(new Reservation(p3,e11));
 
 		gestionEventMetier.annulerRes(res2.getId_res(), p3.getIdPerso(), e1.getId_event());
 		gestionEventMetier.nomPerso(p1.getIdPerso()); 

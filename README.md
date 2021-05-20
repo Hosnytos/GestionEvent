@@ -9,23 +9,24 @@
 
 Application de gestion des billets d’événements proposés par une ville
 
-2 profils : utilisateur, administrateur
+2 profils : utilisateur, administrateur  (Inscription + Connexion)
 
 Utilisateur :
 
 • Rechercher des événements par critères (type, date, localisation,
 ...)
 
-• Faire une réservation
+• Faire une réservation (Admin + User)
 
 • Confirmer la réservation et acheter un billet
+
+•Rédiger une demande de contact
+
+• Gérer ses informations personnelles (Admin + User)
 
 Administrateur :
 
 • Gérer des événements (ajouter un événement, mettre à jour un
 événement, annuler un événement)
 
-• Associer un tarif à l’événement selon des critères (âge, place, ...)
-
-• Visualiser des statistiques (nb de billets vendus
-/semaine/mois/année, nb d’événements proposés/mois/an, ...)
+• Consulter la liste des demandes de contact (Supprimer les messages après lecture)

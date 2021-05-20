@@ -31,4 +31,4 @@ Administrateur :
 
 • Consulter la liste des demandes de contact (Supprimer les messages après lecture)
 
-Lien de la vidéo demo du fonctionnement de l'application : [Video demo](https://drive.google.com/file/d/11XGMSg1biiXC4YU36W3sxqMyUgV1q51f/view?usp=sharing)
+<h2>Lien de la vidéo demo du fonctionnement de l'application : [Video demo](https://drive.google.com/file/d/11XGMSg1biiXC4YU36W3sxqMyUgV1q51f/view?usp=sharing) </h2>

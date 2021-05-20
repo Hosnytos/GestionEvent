@@ -47,6 +47,5 @@ public interface EvenementRepository extends JpaRepository<Evenement, Long> {
 
     @Query("select distinct(type_event) from Evenement ")
     public List<String> listType();
-	
 
 }

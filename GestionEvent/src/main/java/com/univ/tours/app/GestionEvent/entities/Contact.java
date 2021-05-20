@@ -1,6 +1,7 @@
 package com.univ.tours.app.GestionEvent.entities;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +14,9 @@ public class Contact {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id_contact;
 
-    LocalDate date_msg;
+    private Date date_msg;
 
-    String nom, email, sujet, message;
+     private String nom, email, sujet, message;
 
 
     //CONSTRUCTORS
@@ -25,9 +26,9 @@ public class Contact {
     }
 
 
-    public Contact( String nom, String email, String sujet,LocalDate date_msg, String message) {
+    public Contact( String nom, String email, String sujet, String message) {
         super();
-        this.date_msg = date_msg;
+        this.date_msg = new Date();
         this.nom = nom;
         this.email = email;
         this.sujet = sujet;
@@ -90,12 +91,12 @@ public class Contact {
     }
 
 
-    public LocalDate getDate_msg() {
+    public Date getDate_msg() {
         return date_msg;
     }
 
 
-    public void setDate_msg(LocalDate date_msg) {
+    public void setDate_msg(Date date_msg) {
         this.date_msg = date_msg;
     }
 

@@ -34,7 +34,8 @@
 								class="dropdown-item" th:href="@{/rechercheDate}">Date</a>
 						</div></li>
 
-					<li class="nav-item"><a class="nav-link" th:href="@{/addContact}"><i class="far fa-address-book"></i> Contact</a>
+					<li sec:authorize="!hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link" th:href="@{/addContact}"><i class="far fa-address-book"></i> Contact</a>
+					<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link" th:href="@{/afficherContact}"><i class="far fa-address-book"></i> Liste des contacts</a>
 					</li>
 		        </ul>
 		    </div>

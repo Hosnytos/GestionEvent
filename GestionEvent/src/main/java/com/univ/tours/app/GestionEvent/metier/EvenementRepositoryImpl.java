@@ -104,7 +104,6 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 
 	@Override
 	public void annulerRes(Long id_res,Long id_perso, Long id_event) {
-		//Personne p = consulterPersonne(id_perso);
 		Evenement e = consulterEvent(id_event);
 		
 		Reservation res = consulterReservation(id_res);	
@@ -120,7 +119,6 @@ public class EvenementRepositoryImpl implements GestionEventMetier {
 			double prix, double quantite) {
 		
 		Evenement e = evenementRepository.save(new Evenement(nom_event,type_event,description,localisation,date_event,prix,quantite));
-		//this.evenementRepository.save(evenement);
 		
 	}
 

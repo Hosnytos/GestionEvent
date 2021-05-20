@@ -78,9 +78,7 @@ public class GestionEventController {
 
 	@RequestMapping("/index")
 	public String listeEvent(Model model, @RequestParam(name="page", defaultValue = "0") int p, @RequestParam(name="size", defaultValue = "4") int s){
-		//List<Evenement> evenement = gestionEventMetier.listeEvent();
-		//model.addAttribute("evenement", evenement);
-		//model.addAttribute("listeEvent", gestionEventMetier.listeEvent());
+		
 		Page<Evenement> pageEvent = evenementRepo.findAll(PageRequest.of(p, s));
 		model.addAttribute("listeEvent", pageEvent.getContent());
 		int [] pages = new int[pageEvent.getTotalPages()];
@@ -102,7 +100,6 @@ public class GestionEventController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(@ModelAttribute("personne") Personne personne) {
-		Role roleU = roleRepository.findByName("ROLE_USER");
 		String encodedPas = encoder.encode(personne.getMdp());
 		personne.setMdp(encodedPas);
 		personneRepo.save(personne);
@@ -203,8 +200,6 @@ public class GestionEventController {
 	public String afficherContact(Model model, @RequestParam(name="page", defaultValue = "0") int p, @RequestParam(name="size", defaultValue = "5") int s){
 
 		try {
-			//List<Contact> e = contactRepository.findAll();
-			//model.addAttribute("listContact",e);
 
 			Page<Contact> pageEvent = contactRepository.findAll(PageRequest.of(p, s));
 			model.addAttribute("listContact", pageEvent.getContent());
@@ -232,6 +227,7 @@ public class GestionEventController {
 
 	@PostMapping("/saveContact")
 	public String saveContact(@ModelAttribute("contact") Contact contact, Model model){
+		contact.setDate_msg(new Date());
 		contactRepository.save(contact);
 		test = true;
 		model.addAttribute("test", test);
@@ -249,8 +245,6 @@ public class GestionEventController {
 	@PostMapping("/saveEvent")
 	public String saveEvent(@ModelAttribute("evenement") Evenement evenement){
 		evenementRepo.save(evenement);
-		//gestionEventMetier.addEvent(evenement);
-		//model.addAttribute("evenement", evenement);
 		return "redirect:/index";
 
 	}
@@ -262,7 +256,7 @@ public class GestionEventController {
 		Evenement evenement = evenementRepo.searchEventId(id_event);
 
 
-		//set événement as model attribute
+		//On set l'événement en tant que model attribute
 		model.addAttribute("evenement", evenement);
 
 		this.evenementRepo.deleteById(id_event);
@@ -285,41 +279,6 @@ public class GestionEventController {
 
 		return "redirect:/afficherContact";
 	}
-/*
-	@GetMapping("/addReservation")
-	public String addReservation(@PathVariable(value="id_event") Long id_event, Model model){
-		try {
-			//ON rcup user
-			String emailUser = customUser.getUsername(); 
-
-			Personne personne = personneRepo.findPersonneByEmail(emailUser);
-			 
-			//On récupère l'événement
-			Evenement evenement = evenementRepo.searchEventId(id_event);
-
-			//set événement as model attribute
-			//reservationRepo.save(new Reservation(personne, evenement));
-			
-			Reservation reservation = new Reservation(personne, evenement);
-			model.addAttribute("reservation", reservation);
-		} catch (Exception e) {
-			// TODO: handle exception
-			model.addAttribute("exception", e);
-		}
-
-		return "reservation_add";
-
-	}
-
-	@PostMapping("/saveReservation")
-	public String saveReservation(@ModelAttribute("reservation") Reservation reservation ){
-		reservationRepo.save(reservation);
-		//gestionEventMetier.addEvent(evenement);
-		//model.addAttribute("evenement", evenement);
-		return "redirect:/index";
-
-	}
-*/
 	
 	@GetMapping("/saveReservation")
 	public String saveReservation(@RequestParam( value="id_event") String id_event, Model model){
@@ -335,13 +294,7 @@ public class GestionEventController {
 			Evenement evenement = evenementRepo.searchEventId(id);
 			System.out.println("=============" + id + "=========");
 			System.out.println("=============" + id_event + "=========");
-			//set événement as model attribute
-			//reservationRepo.save(new Reservation(personne, evenement));
-			
-			Reservation reservation = new Reservation(personne, evenement);
-			//model.addAttribute("test", test);
-			//test = false;
-			//reservationRepo.save(reservation);
+
 			gestionEventMetier.reserverEvent(personne.getIdPerso(), evenement.getId_event());
 			test = true;
 			System.out.println("==========="+ test + "===========");
@@ -378,14 +331,15 @@ public class GestionEventController {
 	@GetMapping("/editCompte/{idPerso}")
 	public String editCompte(@PathVariable(value="idPerso") Long idPerso , Model model){
 
-		//On récupère la personne
+		//On récupère la personne connectée
 		String emailUser = SecurityContextHolder.getContext().getAuthentication().getName();	
 
 		Personne personne = personneRepo.findPersonneByEmail(emailUser);
 		personne = gestionEventMetier.consulterPersonne(personne.getIdPerso());
 		model.addAttribute("personne", personne);
 
-
+		this.personneRepo.deleteById(personne.getIdPerso());
+		
 		return "personne_edit";
 	}
 	
@@ -393,8 +347,6 @@ public class GestionEventController {
 	public String afficherReservation(Model model, @RequestParam(name="page", defaultValue = "0") int p, @RequestParam(name="size", defaultValue = "5") int s){
 
 		try {
-			//List<Contact> e = contactRepository.findAll();
-			//model.addAttribute("listContact",e);
 
 			Page<Reservation> pageReservation = reservationRepo.findAll(PageRequest.of(p, s));
 			model.addAttribute("listReservation", pageReservation.getContent());
@@ -409,24 +361,6 @@ public class GestionEventController {
 
 		return "reservation_show";
 
-	}
-	
-	@RequestMapping(value ="/getLogedUser")
-	public Map<String, Object> getLogedUser(HttpServletRequest httpServlet){
-		
-		HttpSession httpSession = httpServlet.getSession();
-		SecurityContext secuContxt = (SecurityContext) httpSession.getAttribute("SPRING_SECURITY_CONTEXT");
-		String emailUser = secuContxt.getAuthentication().getName();
-		List<String> roles = new ArrayList<>();
-		for(GrantedAuthority ga:secuContxt.getAuthentication().getAuthorities()) {
-			roles.add(ga.getAuthority());
-		}
-		Map<String, Object> params = new HashMap<>();
-		params.put("email", emailUser);
-		params.put("roles", roles);
-		
-		return params;
-		
 	}
 	
 }

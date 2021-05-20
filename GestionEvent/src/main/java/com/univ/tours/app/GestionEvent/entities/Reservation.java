@@ -19,11 +19,11 @@ public class Reservation implements Serializable {
 	private Date date_res;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_PERSO")
+	@JoinColumn(name = "ID_PERSO", referencedColumnName = "idPerso")
 	private Personne personne;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_EVENT")
+	@JoinColumn(name = "ID_EVENT", referencedColumnName = "id_event")
 	private Evenement evenement;
 
 	

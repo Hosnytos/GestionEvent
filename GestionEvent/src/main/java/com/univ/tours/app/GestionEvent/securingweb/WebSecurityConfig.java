@@ -37,8 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configure(AuthenticationManagerBuilder authenticationManager) throws Exception {
-        /*authenticationManager.authenticationProvider(authenticationProvider());  */ 	
-   
     	
     	authenticationManager
     			.userDetailsService(userDetailsService())
@@ -49,12 +47,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		    			.usersByUsernameQuery("select email as principal, mdp as credentials, true from personne where email = ?")
 		    			.authoritiesByUsernameQuery("select personnes_id_perso as principal, roles_id_role as role from users_roles where personnes_id_perso = ?")
 		    			;
-    	
-    	/*authenticationManager
-        .inMemoryAuthentication()
-        .withUser("pJokic@cia.com").password(passwordEncoder().encode("mdp")).roles("USER")
-        .and()
-        .withUser("jCruz@gign.fr").password(passwordEncoder().encode("mdp")).roles("ADMIN");*/
     	
     }
 
@@ -79,13 +71,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 	.logoutSuccessUrl("/index")
                 	.permitAll();
     	
-    	
-    /*	http.authorizeRequests()
-    	.antMatchers("/index").hasAnyAuthority("ADMIN");*/
-    	
-    	
-        
-        //http.authorizeRequests().antMatchers("/index").hasRole("USER");
     }
 
     @Bean

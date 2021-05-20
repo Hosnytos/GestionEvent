@@ -52,12 +52,9 @@ public class GestionEventApplication implements CommandLineRunner {
 		Role role2 = roleRepository.save(new Role("ROLE_ADMIN"));
 		
 		Personne p1 = personneRepository.save(new Personne("Jokic","Paulo","pJokic@cia.com",47, encoder.encode("mdp")));
-		//p1.getRoles().add(role1);
-		//p1.getRoles().add(role2);
 		Personne p2 = personneRepository.save(new Personne("Cruz","Jessica","jCruz@gign.fr",28, encoder.encode("mdp")));
-		//p2.getRoles().add(role2);
 		Personne p3 = personneRepository.save(new Personne("Friedriech","Hansel","fHansel@reich.deu",30, encoder.encode("mdp")));
-		//p3.getRoles().add(role1);
+		
 		gestionEventMetier.saveRole("jCruz@gign.fr", "ROLE_ADMIN");
 		gestionEventMetier.saveRole("jCruz@gign.fr", "ROLE_USER");
 		gestionEventMetier.saveRole("pJokic@cia.com", "ROLE_USER");
@@ -71,7 +68,6 @@ public class GestionEventApplication implements CommandLineRunner {
 		Evenement e5 = evenementRepository.save(new Evenement("Pirates of the Caribbean", "Film","JackyBoy is back !!!", "Los Angeles",LocalDate.of(2024, 5, 16), 35, 550));
 		Evenement e6 = evenementRepository.save(new Evenement("John Cena - Randy Orton", "Catch","Wrestlemania XXIX", "Massachusetts",LocalDate.of(2021, 12, 31), 100, 1500));
 		Evenement e7 = evenementRepository.save(new Evenement("El Perro - El Lobo", "Combat","Combat de prison illégal", "Guantánamo",LocalDate.of(2016, 8, 10), 750, 100));
-		//Evenement e1 = evenementRepository.save(new Evenement("", "","", "",new Date(), 300, 700));
 		Evenement e8 = evenementRepository.save(new Evenement("Lakers - Warriors", "Match","Finale NBA entre les champions en titre de Lebron James et les Warriors de Stephen Curry", "Staples Center",LocalDate.of(2021, 6, 15), 650, 5700));
 		Evenement e9 = evenementRepository.save(new Evenement("Nadal - Djokovic", "Match","Finale du tournoi de Roland-Garros entre deux légendes", "Paris",LocalDate.of(2019, 4, 27), 1000, 12000));
 		Evenement e10 = evenementRepository.save(new Evenement("Vikings : The movie", "Film","Retrouvez vos héros préférés au Valhalla !", "Canada",LocalDate.of(2022, 10, 22), 15, 1300));

@@ -48,7 +48,7 @@
 						<label>Prix : </label> <label th:text="${evenement.prix}"></label>
 					</div>
 					
-					<div>
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
 						<label>Quantité : </label> <label th:text="${evenement.quantite}"></label>
 					</div>
 

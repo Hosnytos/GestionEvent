@@ -58,7 +58,7 @@
 			</div>
 			 -->
 		</div>
-<!--		<br> <a th:href="@{/afficherReservation}">Mes réservations</a>  -->
+		<br> <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/afficherReservation}">Liste des réservations</a> 
 		
 		<br> <a th:href="@{/index}">Retour à la page d'accueil</a>
 		
